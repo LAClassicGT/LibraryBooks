@@ -21,28 +21,26 @@ class LibraryApp:
                         break
                     dict_data = data.split(',')
                     if len(dict_data) == 3:
-                        while True:
-                            genres_text = 'Выберите жанр(или введите новый):\nНазад - 0\n\n'
-                            genres_text, genres = self.all_genres(genres_text)
-                            option = input(genres_text)
-                            if option == '0':
+                        genres_text = 'Выберите жанр(или введите новый):\nНазад - 0\n\n'
+                        genres_text, genres = self.all_genres(genres_text)
+                        option = input(genres_text)
+                        if option == '0':
+                            os.system('cls')  # очищение консоли
+                            break
+                        if option.isdigit():
+                            try:
+                                keys = list(genres.keys())
+                                index = list(genres.values()).index(int(option))
+                                genre = keys[index]
+                            except:
                                 os.system('cls')  # очищение консоли
+                                print('\nНекорректный ввод\n')
                                 break
-                            if option.isdigit():
-                                try:
-                                    keys = list(genres.keys())
-                                    index = list(genres.values()).index(int(option))
-                                    genre = keys[index]
-                                except:
-                                    os.system('cls')  # очищение консоли
-                                    print('\nНекорректный ввод\n')
-                                    break
-                                dict_data.append(genre)
-                                self.add_book(*dict_data)
-                            else:
-                                dict_data.append(option)
-                                self.add_book(*dict_data)
-                        pass
+                            dict_data.append(genre)
+                            self.add_book(*dict_data)
+                        else:
+                            dict_data.append(option)
+                            self.add_book(*dict_data)
                     else:
                         os.system('cls')  # очищение консоли
                         print('\nНекорректный ввод\n')
